@@ -11,6 +11,50 @@ Functional Simulation: Incisive Simulator (ncvlog, ncelab, ncsim)
 Synthesis: Genus
 
 ### Step 1: Getting Started
+```
+◦ Liberty Files (.lib)
+
+◦ Verilog/VHDL Files (.v or .vhdl or .vhd)
+
+◦ SDC (Synopsis Design Constraint) File (.sdc)
+timescale 1ns/1ns
+module counter(clk,m,rst,count);
+input clk,m,rst;
+output reg [3:0] count;
+always@(posedge clk or negedge rst)
+begin
+if (!rst)
+count=0;
+else if(m)
+count=count+1;
+else
+count=count-1;
+end
+endmodule
+```
+```
+timescale 1ns/1ns
+module counter_test;
+reg clk,rst,m;
+wire [3:0] count;
+initial
+begin
+clk=0;
+rst=0;#5;
+rst=1;
+end
+initial
+begin
+m=1;
+#160 m=0;
+end
+counter dut(clk,m,rst,count);
+always #5 clk=~clk;
+initial $monitor("Time=%t rst=%b clk=%b count=%b" , $time,rst,clk,count);
+initial
+#320 $finish;
+endmodule
+```
 
 Synthesis requires three files as follows,
 
@@ -64,12 +108,16 @@ used.
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist.
 
 #### Synthesis RTL Schematic :
+![WhatsApp Image 2025-05-21 at 15 24 30_7af6fbde](https://github.com/user-attachments/assets/4a66b6f7-c2cc-4bec-b5a2-599a0ebee99e)
 
 #### Area report:
+![WhatsApp Image 2025-05-21 at 15 24 30_0d4c3014](https://github.com/user-attachments/assets/89833b34-7ecd-4b15-b9ab-d06fe48ffa29)
 
 #### Power Report:
+![WhatsApp Image 2025-05-21 at 15 24 30_467b0e3e](https://github.com/user-attachments/assets/f71b6946-709a-4587-9427-d83bdea4eae8)
 
 #### Timing Report: 
+![WhatsApp Image 2025-05-21 at 15 24 29_72af317f](https://github.com/user-attachments/assets/94e40909-8b46-4a59-869c-48d73b37e61d)
 
 #### Result: 
 
