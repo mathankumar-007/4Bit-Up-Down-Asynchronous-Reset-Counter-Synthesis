@@ -11,12 +11,12 @@ Functional Simulation: Incisive Simulator (ncvlog, ncelab, ncsim)
 Synthesis: Genus
 
 ### Step 1: Getting Started
-```
 ◦ Liberty Files (.lib)
 
 ◦ Verilog/VHDL Files (.v or .vhdl or .vhd)
 
 ◦ SDC (Synopsis Design Constraint) File (.sdc)
+```
 timescale 1ns/1ns
 module counter(clk,m,rst,count);
 input clk,m,rst;
